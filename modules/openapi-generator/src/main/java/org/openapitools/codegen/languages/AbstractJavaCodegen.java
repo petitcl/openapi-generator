@@ -1321,6 +1321,11 @@ public abstract class AbstractJavaCodegen extends DefaultCodegen implements Code
         }
 
         if (openApiNullable) {
+            System.err.printf("property=%s%n", property.name);
+            System.err.printf("openApiNullable=%s%n", openApiNullable);
+            System.err.printf("required=%s%n", property.required);
+            System.err.printf("isNullable=%s%n", property.isNullable);
+            System.err.printf("%n%n%n%n");
             if (Boolean.FALSE.equals(property.required) && Boolean.TRUE.equals(property.isNullable)) {
                 model.imports.add("JsonNullable");
                 model.getVendorExtensions().put("x-jackson-optional-nullable-helpers", true);

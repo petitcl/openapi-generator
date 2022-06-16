@@ -1,0 +1,25 @@
+openapi: "3.0.1"
+info:
+  version: 1.0.0
+  title: Nullable field handling in Java client generator (Github issue 12549)
+paths:
+  /test:
+    get:
+      responses:
+        '200':
+          $ref: '#/components/schemas/TestResponseBody'
+components:
+  schemas:
+    TestResponseBody:
+      required:
+        - requiredField
+      type: object
+      properties:
+        requiredField:
+          type: string
+        nullableOptionalField:
+          type: string
+          nullable: true
+        optionalField:
+          type: string
+          nullable: false

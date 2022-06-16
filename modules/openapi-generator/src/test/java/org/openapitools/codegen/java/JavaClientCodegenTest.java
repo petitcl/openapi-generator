@@ -1573,4 +1573,33 @@ public class JavaClientCodegenTest {
                     .assertParameterAnnotations()
                     .containsWithName("NotNull");
     }
+
+    @Test
+    public void testNullableFieldsInResponse() throws Exception {
+        File output = Files.createTempDirectory("test").toFile().getCanonicalFile();
+        output.deleteOnExit();
+        Map<String, Object> additionalProperties = new HashMap<>();
+//        additionalProperties.put(BeanValidationFeatures.USE_BEANVALIDATION, "true");
+        final CodegenConfigurator configurator = new CodegenConfigurator().setGeneratorName("java")
+            .setAdditionalProperties(additionalProperties)
+            .setInputSpec("src/test/resources/3_0/issue_12549.yaml")
+            .setOutputDir(output.getAbsolutePath()
+                .replace("\\", "/"));
+
+        final ClientOptInput clientOptInput = configurator.toClientOptInput();
+        DefaultGenerator generator = new DefaultGenerator();
+
+        Map<String, File> files = generator.opts(clientOptInput).generate().stream()
+            .collect(Collectors.toMap(File::getName, Function.identity()));
+
+
+        JavaFileAssert.assertThat(files.get("TestResponseBody.java"))
+            .printFileContent()
+            .assertMethod("validateJsonObject")
+            .bodyContainsLines("jsonObj.get(\"requiredField\") != null && !jsonObj.get(\"requiredField\").isJsonPrimitive()")
+            .bodyContainsLines("jsonObj.get(\"nullableOptionalField\") != null && !jsonObj.get(\"nullableOptionalField\").isJsonPrimitive()")
+            .bodyContainsLines("jsonObj.get(\"optionalField\") != null && !jsonObj.get(\"optionalField\").isJsonPrimitive()")
+        ;
+    }
+
 }
