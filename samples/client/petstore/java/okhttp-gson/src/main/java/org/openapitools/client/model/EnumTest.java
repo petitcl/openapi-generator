@@ -687,7 +687,7 @@ public class EnumTest {
       if (jsonObj.get("enum_string") != null && !jsonObj.get("enum_string").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `enum_string` to be a primitive type in the JSON string but got `%s`", jsonObj.get("enum_string").toString()));
       }
-      if (jsonObj.get("enum_string_required") != null && !jsonObj.get("enum_string_required").isJsonPrimitive()) {
+      if (!jsonObj.get("enum_string_required").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `enum_string_required` to be a primitive type in the JSON string but got `%s`", jsonObj.get("enum_string_required").toString()));
       }
   }

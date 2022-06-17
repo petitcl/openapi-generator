@@ -2186,6 +2186,55 @@ components:
       required:
       - name
       type: object
+    TestResponseBody:
+      properties:
+        requiredField:
+          nullable: false
+          type: string
+        requiredNullableField:
+          nullable: true
+          type: string
+        optionalField:
+          nullable: false
+          type: string
+        optionalNullableField:
+          nullable: true
+          type: string
+        requiredArrayField:
+          items:
+            type: string
+          nullable: false
+          type: array
+        requiredNullableArrayField:
+          items:
+            type: string
+          nullable: true
+          type: array
+        optionalArrayField:
+          items:
+            type: string
+          nullable: false
+          type: array
+        optionalNullableArrayField:
+          items:
+            type: string
+          nullable: true
+          type: array
+        requiredObjectField:
+          type: object
+        requiredNullableObjectField:
+          type: object
+        optionalObjectField:
+          nullable: false
+          type: object
+        nullableObjectField:
+          nullable: true
+          type: object
+      required:
+      - requiredArrayField
+      - requiredField
+      - requiredObjectField
+      type: object
     _foo_get_default_response:
       example:
         string:

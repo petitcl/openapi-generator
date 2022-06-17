@@ -2205,3 +2205,52 @@ components:
                 properties:
                   color:
                     type: string
+    TestResponseBody:
+      required:
+        - requiredField
+        - requiredArrayField
+        - requiredObjectField
+      type: object
+      properties:
+        requiredField:
+          type: string
+          nullable: false
+        requiredNullableField:
+          type: string
+          nullable: true
+        optionalField:
+          type: string
+          nullable: false
+        optionalNullableField:
+          type: string
+          nullable: true
+        requiredArrayField:
+          type: array
+          items:
+            type: string
+          nullable: false
+        requiredNullableArrayField:
+          type: array
+          items:
+            type: string
+          nullable: true
+        optionalArrayField:
+          type: array
+          items:
+            type: string
+          nullable: false
+        optionalNullableArrayField:
+          type: array
+          items:
+            type: string
+          nullable: true
+        requiredObjectField:
+          type: object
+        requiredNullableObjectField:
+          type: object
+        optionalObjectField:
+          type: object
+          nullable: false
+        nullableObjectField:
+          type: object
+          nullable: true

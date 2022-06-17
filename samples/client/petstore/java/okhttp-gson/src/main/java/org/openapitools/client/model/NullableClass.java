@@ -549,8 +549,8 @@ public class NullableClass {
           throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `NullableClass` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
         }
       }
-      if (jsonObj.get("string_prop") != null && !jsonObj.get("string_prop").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `string_prop` to be a primitive type in the JSON string but got `%s`", jsonObj.get("string_prop").toString()));
+      if (jsonObj.get("string_prop") != null && !jsonObj.get("string_prop").isJsonPrimitive() && !jsonObj.get("string_prop").isJsonNull()) {
+        throw new IllegalArgumentException(String.format("Expected the field `string_prop` to be a primitive type or null in the JSON string but got `%s`", jsonObj.get("string_prop").toString()));
       }
       // ensure the json data is an array
       if (jsonObj.get("array_nullable_prop") != null && !jsonObj.get("array_nullable_prop").isJsonArray()) {

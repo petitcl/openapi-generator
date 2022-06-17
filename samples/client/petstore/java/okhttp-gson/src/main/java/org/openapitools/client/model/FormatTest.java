@@ -663,7 +663,7 @@ public class FormatTest {
       if (jsonObj.get("uuid") != null && !jsonObj.get("uuid").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `uuid` to be a primitive type in the JSON string but got `%s`", jsonObj.get("uuid").toString()));
       }
-      if (jsonObj.get("password") != null && !jsonObj.get("password").isJsonPrimitive()) {
+      if (!jsonObj.get("password").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `password` to be a primitive type in the JSON string but got `%s`", jsonObj.get("password").toString()));
       }
       if (jsonObj.get("pattern_with_digits") != null && !jsonObj.get("pattern_with_digits").isJsonPrimitive()) {
