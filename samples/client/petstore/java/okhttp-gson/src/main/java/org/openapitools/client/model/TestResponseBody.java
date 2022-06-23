@@ -74,7 +74,7 @@ public class TestResponseBody {
 
   public static final String SERIALIZED_NAME_REQUIRED_NULLABLE_ARRAY_FIELD = "requiredNullableArrayField";
   @SerializedName(SERIALIZED_NAME_REQUIRED_NULLABLE_ARRAY_FIELD)
-  private List<String> requiredNullableArrayField = null;
+  private List<String> requiredNullableArrayField = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_OPTIONAL_ARRAY_FIELD = "optionalArrayField";
   @SerializedName(SERIALIZED_NAME_OPTIONAL_ARRAY_FIELD)
@@ -137,7 +137,7 @@ public class TestResponseBody {
    * @return requiredNullableField
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public String getRequiredNullableField() {
     return requiredNullableField;
@@ -230,9 +230,6 @@ public class TestResponseBody {
   }
 
   public TestResponseBody addRequiredNullableArrayFieldItem(String requiredNullableArrayFieldItem) {
-    if (this.requiredNullableArrayField == null) {
-      this.requiredNullableArrayField = new ArrayList<>();
-    }
     this.requiredNullableArrayField.add(requiredNullableArrayFieldItem);
     return this;
   }
@@ -242,7 +239,7 @@ public class TestResponseBody {
    * @return requiredNullableArrayField
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
 
   public List<String> getRequiredNullableArrayField() {
     return requiredNullableArrayField;
@@ -349,8 +346,8 @@ public class TestResponseBody {
    * Get requiredNullableObjectField
    * @return requiredNullableObjectField
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @javax.annotation.Nonnull
+  @ApiModelProperty(required = true, value = "")
 
   public Object getRequiredNullableObjectField() {
     return requiredNullableObjectField;
@@ -539,8 +536,11 @@ public class TestResponseBody {
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
     openapiRequiredFields.add("requiredField");
+    openapiRequiredFields.add("requiredNullableField");
     openapiRequiredFields.add("requiredArrayField");
+    openapiRequiredFields.add("requiredNullableArrayField");
     openapiRequiredFields.add("requiredObjectField");
+    openapiRequiredFields.add("requiredNullableObjectField");
   }
 
  /**
@@ -567,7 +567,7 @@ public class TestResponseBody {
       if (!jsonObj.get("requiredField").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `requiredField` to be a primitive type in the JSON string but got `%s`", jsonObj.get("requiredField").toString()));
       }
-      if (jsonObj.get("requiredNullableField") != null && !jsonObj.get("requiredNullableField").isJsonPrimitive() && !jsonObj.get("requiredNullableField").isJsonNull()) {
+      if (!jsonObj.get("requiredNullableField").isJsonPrimitive() && !jsonObj.get("requiredNullableField").isJsonNull()) {
         throw new IllegalArgumentException(String.format("Expected the field `requiredNullableField` to be a primitive type or null in the JSON string but got `%s`", jsonObj.get("requiredNullableField").toString()));
       }
       if (jsonObj.get("optionalField") != null && !jsonObj.get("optionalField").isJsonPrimitive()) {
@@ -581,7 +581,7 @@ public class TestResponseBody {
         throw new IllegalArgumentException(String.format("Expected the field `requiredArrayField` to be an array in the JSON string but got `%s`", jsonObj.get("requiredArrayField").toString()));
       }
       // ensure the json data is an array
-      if (jsonObj.get("requiredNullableArrayField") != null && !jsonObj.get("requiredNullableArrayField").isJsonArray()) {
+      if (!jsonObj.get("requiredNullableArrayField").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `requiredNullableArrayField` to be an array in the JSON string but got `%s`", jsonObj.get("requiredNullableArrayField").toString()));
       }
       // ensure the json data is an array

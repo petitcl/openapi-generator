@@ -2208,8 +2208,11 @@ components:
     TestResponseBody:
       required:
         - requiredField
+        - requiredNullableField
         - requiredArrayField
+        - requiredNullableArrayField
         - requiredObjectField
+        - requiredNullableObjectField
       type: object
       properties:
         requiredField:

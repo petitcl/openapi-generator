@@ -2233,6 +2233,9 @@ components:
       required:
       - requiredArrayField
       - requiredField
+      - requiredNullableArrayField
+      - requiredNullableField
+      - requiredNullableObjectField
       - requiredObjectField
       type: object
     _foo_get_default_response:

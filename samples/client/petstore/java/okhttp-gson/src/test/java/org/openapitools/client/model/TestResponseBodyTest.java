@@ -13,18 +13,12 @@
 
 package org.openapitools.client.model;
 
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonNull;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import org.openapitools.jackson.nullable.JsonNullable;
-import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 
@@ -32,110 +26,72 @@ import org.junit.jupiter.api.Test;
  * Model tests for TestResponseBody
  */
 public class TestResponseBodyTest {
-    private final TestResponseBody model = new TestResponseBody();
 
-    /**
-     * Model tests for TestResponseBody
-     */
     @Test
-    public void testTestResponseBody() {
-        // TODO: test TestResponseBody
+    void objectWithAllFieldsIsValid() throws IOException {
+        final JsonObject valid = validObject();
+
+        assertThatObjectIsValid(valid);
     }
 
-    /**
-     * Test the property 'requiredField'
-     */
     @Test
-    public void requiredFieldTest() {
-        // TODO: test requiredField
+    void objectWithMissingRequiredFieldIsInvalid() throws IOException {
+        final JsonObject valid = validObject();
+        valid.remove("requiredField");
+
+        assertThatObjectIsInvalid(valid, "The required field `requiredField` is not found in the JSON string");
     }
 
-    /**
-     * Test the property 'requiredNullableField'
-     */
     @Test
-    public void requiredNullableFieldTest() {
-        // TODO: test requiredNullableField
+    void objectWithNullRequiredFieldIsValid() throws IOException {
+        final JsonObject valid = validObject();
+        valid.add("requiredField", JsonNull.INSTANCE);
+
+        assertThatObjectIsInvalid(valid, "Expected the field `requiredField` to be a primitive type in the JSON string but got `null`");
     }
 
-    /**
-     * Test the property 'optionalField'
-     */
     @Test
-    public void optionalFieldTest() {
-        // TODO: test optionalField
+    void objectWithMissingRequiredNullableFieldIsInvalid() throws IOException {
+        final JsonObject valid = validObject();
+        valid.remove("requiredNullableField");
+
+        assertThatObjectIsInvalid(valid, "The required field `requiredNullableField` is not found in the JSON string");
     }
 
-    /**
-     * Test the property 'optionalNullableField'
-     */
-    @Test
-    public void optionalNullableFieldTest() {
-        // TODO: test optionalNullableField
+    void assertThatObjectIsValid(JsonObject object) {
+        Assertions.assertDoesNotThrow(() -> TestResponseBody.validateJsonObject(object));
     }
 
-    /**
-     * Test the property 'requiredArrayField'
-     */
-    @Test
-    public void requiredArrayFieldTest() {
-        // TODO: test requiredArrayField
+    void assertThatObjectIsInvalid(JsonObject object, String expectedMessage) {
+        try {
+            TestResponseBody.validateJsonObject(object);
+        } catch (Exception e) {
+            Assertions.assertInstanceOf(IllegalArgumentException.class, e);
+            final String actualMessage = e.getMessage();
+            Assertions.assertTrue(
+                actualMessage.startsWith(expectedMessage),
+
+                String.format("Expected [%s] to start with [%s]", actualMessage, expectedMessage)
+            );
+            return;
+        }
+        throw new IllegalStateException("Expected object to be invalid but is valid");
     }
 
-    /**
-     * Test the property 'requiredNullableArrayField'
-     */
-    @Test
-    public void requiredNullableArrayFieldTest() {
-        // TODO: test requiredNullableArrayField
+    private JsonObject validObject() {
+        final JsonObject object = new JsonObject();
+        object.add("requiredField", new JsonPrimitive(""));
+        object.add("requiredNullableField", new JsonPrimitive(""));
+        object.add("optionalField", new JsonPrimitive(""));
+        object.add("optionalNullableField", new JsonPrimitive(""));
+        object.add("requiredArrayField", new JsonArray());
+        object.add("requiredNullableArrayField", new JsonArray());
+        object.add("optionalArrayField", new JsonArray());
+        object.add("optionalNullableArrayField", new JsonArray());
+        object.add("requiredObjectField", new JsonObject());
+        object.add("requiredNullableObjectField", new JsonObject());
+        object.add("optionalObjectField", new JsonObject());
+        object.add("nullableObjectField", new JsonObject());
+        return object;
     }
-
-    /**
-     * Test the property 'optionalArrayField'
-     */
-    @Test
-    public void optionalArrayFieldTest() {
-        // TODO: test optionalArrayField
-    }
-
-    /**
-     * Test the property 'optionalNullableArrayField'
-     */
-    @Test
-    public void optionalNullableArrayFieldTest() {
-        // TODO: test optionalNullableArrayField
-    }
-
-    /**
-     * Test the property 'requiredObjectField'
-     */
-    @Test
-    public void requiredObjectFieldTest() {
-        // TODO: test requiredObjectField
-    }
-
-    /**
-     * Test the property 'requiredNullableObjectField'
-     */
-    @Test
-    public void requiredNullableObjectFieldTest() {
-        // TODO: test requiredNullableObjectField
-    }
-
-    /**
-     * Test the property 'optionalObjectField'
-     */
-    @Test
-    public void optionalObjectFieldTest() {
-        // TODO: test optionalObjectField
-    }
-
-    /**
-     * Test the property 'nullableObjectField'
-     */
-    @Test
-    public void nullableObjectFieldTest() {
-        // TODO: test nullableObjectField
-    }
-
 }
